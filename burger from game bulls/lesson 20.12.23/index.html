@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      textarea:focus,
+      input:focus {
+        outline: none;
+      }
+
+      .right {
+        border: 1px solid green;
+      }
+
+      .wrong {
+        border: 1px solid red;
+      }
+
+      .un_active {
+        border: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form id="form" action="">
+      <div id="test">
+        <div>
+          <p>вопрос 1?</p>
+          <input data-right="ответ 1" name="answer1" />
+        </div>
+        <div>
+          <p>вопрос 2?</p>
+          <input data-right="ответ 2" name="answer2" />
+        </div>
+        <div>
+          <p>вопрос 3?</p>
+          <input data-right="ответ 3" name="answer3" />
+        </div>
+      </div>
+      <button type="submit">submit</button>
+    </form>
+
+    <script>
+      // 1) получить родительский див по ID
+      // - получить айди и присвоить его переменной
+
+      // 2) перехватить событие нажатия Enter
+
+      // - написать callback функцию которая срабатывает по событию 'keyup'
+      // - проверка на нажатие клавиши 'Enter'
+      // - получить данные инпута и положить в переменные value и data
+
+      // 3) сравнить ответ и значение
+      // - сделать условие если ответ верный -  бордер -зеленый, если нет - красный.
+
+      // 4) cоздать кнопку проверки
+      // - получить дом элемент кнопки 'check' и присвоить его переменной
+      // - добавить событие 'onclick' на кнопку 'check'
+      // - написать callback функцию которая срабатывает по событию 'onclick'
+      // - создать переменную и присвоить ей значение из инпута (из переменной event.target.value)
+      // - const input = event.target.closest("input") - получить dataset и сохранить в переменной
+      // - вызвать функцию compareAnswer и передать в нее переменные answer, data
+      //
+
+      const test = document.querySelector("#test");
+      console.dir(test);
+
+      function toggleClass(input, className) {
+        console.log(input.classList);
+        input.classList.value = "";
+        input.classList.toggle(className);
+      }
+
+      function compareAnswer(answer, data) {
+        return answer.includes(data) ? true : false;
+      }
+
+      function handleKeyUp(event) {
+        const input = event.target.closest("input");
+        console.log(input);
+
+        console.log(event);
+        if (event.key === "Enter") {
+          const answer = input.value;
+          const data = input.dataset.right;
+          const result = compareAnswer(answer, data);
+
+          result ? toggleClass(input, "right") : toggleClass(input, "wrong");
+        }
+      }
+
+      // test.addEventListener("keyup", handleKeyUp);
+
+      const checkBtns = document.querySelectorAll("button");
+
+      function handleClick(event) {
+        const input = event.target.closest("input");
+        console.log(input);
+        console.log(event);
+      }
+
+      for (let i = 0; i < checkBtns.length; i++) {
+        checkBtns[i].addEventListener("click", handleClick);
+      }
+      // const value = test.target.closest("input");
+      // console.log(value);
+
+      const checkForm = document.querySelector("#form");
+      console.log(checkForm);
+      checkForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        console.log(event);
+      });
+    </script>
+  </body>
+</html>
