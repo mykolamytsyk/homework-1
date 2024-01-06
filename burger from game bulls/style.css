@@ -42,7 +42,7 @@ img {
   --color-border-active-blue: #0dcaf0;
 }
 
-.accordion {
+.mainblock {
   display: flex;
   flex-direction: column;
   max-width: 600px;
