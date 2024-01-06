@@ -112,13 +112,16 @@ generateBtn.addEventListener("click", generateRandom);
 const checkBtn = document.createElement("button");
 
 divHidden.append(checkBtn);
-
 checkBtn.textContent = "CHECK";
 
-checkBtn.style.cursor = "pointer";
-checkBtn.style.backgroundColor = "blue";
-checkBtn.style.color = "white";
-checkBtn.style.marginLeft = "50px";
+const customStyles = {
+  cursor: "pointer",
+  backgroundColor: "blue",
+  color: "white",
+  marginLeft: "50px",
+};
+
+Object.assign(checkBtn.style, customStyles);
 
 let inputArray = [];
 
