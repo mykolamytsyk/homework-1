@@ -25,19 +25,26 @@ titles.forEach((item) =>
 );
 
 // начало
+const customStyles = {
+  cursor: "pointer",
+  backgroundColor: "blue",
+  color: "white",
+  marginLeft: "50px",
+};
 const btnStart = document.createElement("button");
-
 btnStart.textContent = "START GAME";
-btnStart.style.backgroundColor = "red";
-btnStart.style.cursor = "pointer";
+Object.assign(btnStart.style, customStyles);
 document.body.append(btnStart);
+
 const divHidden = document.createElement("div");
 document.body.append(divHidden);
-
-divHidden.style.display = "none";
-divHidden.style.height = "500px";
-divHidden.style.width = "710px";
-divHidden.style.backgroundColor = "green";
+const customStylesDiv = {
+  display: "none",
+  height: "500px",
+  width: "710px",
+  backgroundColor: "green",
+};
+Object.assign(divHidden.style, customStylesDiv);
 
 btnStart.addEventListener("click", function () {
   divHidden.style.display = "block";
@@ -51,17 +58,8 @@ const input3 = document.createElement("input");
 divHidden.append(input0, input1, input2, input3);
 
 const clearBtn = document.createElement("button");
-
 divHidden.append(clearBtn);
-
 clearBtn.textContent = "Clear input";
-
-const customStyles = {
-  cursor: "pointer",
-  backgroundColor: "blue",
-  color: "white",
-  marginLeft: "50px",
-};
 Object.assign(clearBtn.style, customStyles);
 
 const inputs = [input0, input1, input2, input3];
@@ -136,8 +134,6 @@ checkBtn.addEventListener("click", function () {
 let bulls = 0;
 let cows = 0;
 function checkNumbers() {
-  let bulls = 0;
-  let cows = 0;
   for (let i = 0; i < inputArray.length; i++) {
     if (inputArray[i] === arrRandom[i]) {
       bulls++;
