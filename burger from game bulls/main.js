@@ -28,16 +28,11 @@ titles.forEach((item) =>
 const btnStart = document.createElement("button");
 
 btnStart.textContent = "START GAME";
-
 btnStart.style.backgroundColor = "red";
 btnStart.style.cursor = "pointer";
-
 document.body.append(btnStart);
-
 const divHidden = document.createElement("div");
 document.body.append(divHidden);
-
-divHidden.classList.add("divHiddenClass");
 
 divHidden.style.display = "none";
 divHidden.style.height = "500px";
@@ -53,10 +48,7 @@ const input1 = document.createElement("input");
 const input2 = document.createElement("input");
 const input3 = document.createElement("input");
 
-divHidden.append(input0);
-divHidden.append(input1);
-divHidden.append(input2);
-divHidden.append(input3);
+divHidden.append(input0, input1, input2, input3);
 
 const clearBtn = document.createElement("button");
 
@@ -64,27 +56,27 @@ divHidden.append(clearBtn);
 
 clearBtn.textContent = "Clear input";
 
-clearBtn.style.cursor = "pointer";
-clearBtn.style.backgroundColor = "blue";
-clearBtn.style.color = "white";
+const customStyles = {
+  cursor: "pointer",
+  backgroundColor: "blue",
+  color: "white",
+  marginLeft: "50px",
+};
+Object.assign(clearBtn.style, customStyles);
+
+const inputs = [input0, input1, input2, input3];
 
 clearBtn.addEventListener("click", function () {
-  input0.value = " ";
-  input1.value = " ";
-  input2.value = " ";
-  input3.value = " ";
+  inputs.forEach((input) => (input.value = ""));
 });
 
 const generateBtn = document.createElement("button");
 
 divHidden.append(generateBtn);
-
 generateBtn.textContent = "GENERATE";
 
-generateBtn.style.cursor = "pointer";
-generateBtn.style.backgroundColor = "blue";
-generateBtn.style.color = "white";
-generateBtn.style.marginLeft = "50px";
+Object.assign(generateBtn.style, customStyles);
+let arrRandom;
 
 function generateRandom() {
   let random1, random2, random3, random4;
@@ -103,23 +95,15 @@ function generateRandom() {
     random3 === random4
   );
 
-  return [random1, random2, random3, random4];
+  arrRandom = [random1, random2, random3, random4];
+  return arrRandom;
 }
-let arrRandom = generateRandom();
 
 generateBtn.addEventListener("click", generateRandom);
 
 const checkBtn = document.createElement("button");
-
 divHidden.append(checkBtn);
 checkBtn.textContent = "CHECK";
-
-const customStyles = {
-  cursor: "pointer",
-  backgroundColor: "blue",
-  color: "white",
-  marginLeft: "50px",
-};
 
 Object.assign(checkBtn.style, customStyles);
 
@@ -161,7 +145,6 @@ function checkNumbers() {
       cows++;
     }
   }
-
   let resultParagraf = document.createElement("p");
   divHidden.append(resultParagraf);
   resultParagraf.style.backgroundColor = "yellow";
@@ -170,5 +153,4 @@ function checkNumbers() {
     alert("YOU WIN");
   }
 }
-
 checkBtn.addEventListener("click", checkNumbers);
