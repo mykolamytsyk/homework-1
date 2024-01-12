@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Reset styles */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p {
+        margin: 0;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      a {
+        color: currentColor;
+        text-decoration: none;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      :root {
+        --color-plus-grey: #a1a3a5;
+        --color-border-grey: #dee2e6;
+        --color-text-dark: #212529;
+        --color-background-white: #fff;
+        --color-border-active-blue: #0dcaf0;
+      }
+
+      .mainblock {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .accordion__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 10px 20px;
+        cursor: pointer;
+        border: 1px solid var(--color-border-grey);
+        border-top: none;
+        color: var(--color-text-dark);
+        background-color: var(--color-background-white);
+      }
+
+      .accordion:first-child {
+        border-top: 1px solid var(--color-border-grey);
+      }
+
+      .accordion__title.active {
+        box-shadow: 0 0 12px 1px var(--color-border-active-blue);
+      }
+
+      .accordion__title span {
+        display: inline-flex;
+        position: relative;
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        transform: rotate(0);
+        transition: transform 0.5s ease-out;
+      }
+
+      .accordion__title.active span {
+        transform: rotate(45deg);
+      }
+
+      .accordion__title span::before {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 2px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--color-plus-grey);
+      }
+
+      .accordion__title span::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 50%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--color-plus-grey);
+      }
+
+      .accordion__content {
+        font-size: 7px;
+        line-height: 1.3;
+        overflow: hidden;
+        padding: 0 20px;
+        box-sizing: content-box;
+        border: 1px solid var(--color-border-grey);
+        border-top: none;
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height 0.5s ease-out, padding 0.5s ease-out,
+          opacity 0.1s ease-out 0.5s, visibility 0.1s ease-out 0.5s;
+      }
+
+      .accordion__content.active {
+        visibility: visible;
+        opacity: 1;
+        padding: 20px;
+        transition: max-height 0.5s ease-out, padding 0.5s ease-out,
+          opacity 0.1s ease-out, visibility 0.1s ease-out;
+      }
+
+      .game-menu {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #fff;
+        background-color: #ff4500; /* Оранжевий колір, можна вибрати інший */
+        border: 2px solid #e9743d; /* Колір обводки */
+        border-radius: 10px; /* Радіус закруглення кутів */
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        cursor: pointer;
+      }
+
+      .game-menu:hover {
+        background-color: #e9743d; /* Змінюємо колір при наведенні */
+        transform: scale(1.05); /* Невелике збільшення при наведенні */
+      }
+
+      .button-box {
+        display: flex;
+
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="accordeon">
+      <div class="mainblock">
+        <div data-tab="tab-1" class="accordion__title">
+          <h3>Rule 1</h3>
+          <span></span>
+        </div>
+        <div id="tab-1" class="accordion__content">
+          Каждый из игроков задумывает и записывает тайное 4-значное число с
+          неповторяющимися цифрами[1]. Игрок, который начинает игру по жребию,
+          делает первую попытку отгадать число.
+        </div>
+      </div>
+      <div class="mainblock">
+        <div data-tab="tab-2" class="accordion__title">
+          <h3>Rule 2</h3>
+          <span></span>
+        </div>
+        <div id="tab-2" class="accordion__content">
+          Попытка — это 4-значное число с неповторяющимися цифрами, сообщаемое
+          противнику. Противник сообщает в ответ, сколько цифр угадано без
+          совпадения с их позициями в тайном числе (то есть количество коров) и
+          сколько угадано вплоть до позиции в тайном числе (то есть количество
+          быков). Например: Задумано тайное число «3219». Попытка: «2310».
+          Результат: две «коровы» (две цифры: «2» и «3» — угаданы на неверных
+          позициях) и один «бык» (одна цифра «1» угадана вплоть до позиции).
+          Игроки делают попытки угадать по очереди. Побеждает тот, кто угадает
+          число первым, при условии, что он не начинал игру. Если же отгадавший
+          начинал игру — его противнику предоставляется последний шанс угадать
+          последовательность. При игре против компьютера игрок вводит комбинации
+          одну за другой, пока не отгадает всю последовательность.
+        </div>
+      </div>
+    </div>
+    <script>
+      // 1.Создаем аккордеон с правилами
+      const titles = document.querySelectorAll(".accordion__title");
+      const contents = document.querySelectorAll(".accordion__content");
+
+      titles.forEach((item) =>
+        item.addEventListener("click", () => {
+          const activeContent = document.querySelector("#" + item.dataset.tab);
+
+          if (activeContent.classList.contains("active")) {
+            activeContent.classList.remove("active");
+            item.classList.remove("active");
+            activeContent.style.maxHeight = 0;
+          } else {
+            contents.forEach((element) => {
+              element.classList.remove("active");
+              element.style.maxHeight = 0;
+            });
+            titles.forEach((element) => element.classList.remove("active"));
+
+            item.classList.add("active");
+            activeContent.classList.add("active");
+            activeContent.style.maxHeight = activeContent.scrollHeight + "px";
+          }
+        })
+      );
+      // Инициализация множества уникальных цифр
+      const mySet = new Set();
+      while (mySet.size < 4) {
+        mySet.add(Math.floor(Math.random() * 9 + 1));
+      }
+      const setArray = Array.from(mySet);
+      // Инпут
+      const input = document.createElement("input");
+      input.maxLength = 4;
+      document.body.append(input);
+      input.style.display = "none";
+
+      // Кнопка "Check"
+      const checkBtn = document.createElement("button");
+      checkBtn.textContent = "Check";
+      document.body.append(checkBtn);
+      checkBtn.style.display = "none";
+
+      // Кнопка "clearBtn"
+      const clearBtn = document.createElement("button");
+      clearBtn.textContent = "Clear";
+      document.body.append(clearBtn);
+      clearBtn.style.display = "none";
+
+      // Работа кнопки "clearBtn"
+      clearBtn.addEventListener("click", function () {
+        input.value = "";
+        input.focus();
+      });
+
+      // Кнопка "Start"
+      const startBtn = document.createElement("button");
+      startBtn.textContent = "Start";
+      document.body.append(startBtn);
+
+      // Действия на кнопке старт
+      startBtn.addEventListener("click", function () {
+        startBtn.style.display = "none";
+        input.style.display = "inline-block";
+        checkBtn.style.display = "inline-block";
+        clearBtn.style.display = "inline-block";
+      });
+      //  Сравнение масивов с проверкой на символі, 0, одинаковіе цифрі
+
+      checkBtn.addEventListener("click", function () {
+        inputArray = Array.from(input.value);
+        if (/^\d{4}$/.test(inputArray.join(""))) {
+          if (!inputArray.includes("0")) {
+            if (new Set(inputArray).size === inputArray.length) {
+            } else {
+              alert("Число должно содержать только разные цифры");
+            }
+          } else {
+            alert("Число не должно содержать 0");
+          }
+        } else {
+          alert("Число должно содержать ровно 4 цифры");
+        }
+
+        checkNumbers();
+      });
+      // Проверка на количество бічков и коров
+
+      let bulls = 0;
+      let cows = 0;
+      function checkNumbers() {
+        bulls = 0;
+        cows = 0;
+
+        for (let i = 0; i < inputArray.length; i++) {
+          if (inputArray[i] == setArray[i]) {
+            bulls++;
+          } else if (setArray.includes(Number(inputArray[i]))) {
+            cows++;
+          }
+        }
+
+        // Проверка на наличие параграфа с результатом
+
+        const par = document.querySelector("p");
+        if (par) {
+          par.remove();
+        }
+
+        const newPar = document.createElement("p");
+        document.body.append(newPar);
+        newPar.textContent = `Cows: ${cows} and Bulls: ${bulls}`;
+
+        // Добавить, в случае победі
+
+        if (bulls === 4) {
+          alert("YOU WIN");
+        }
+      }
+    </script>
+  </body>
+</html>

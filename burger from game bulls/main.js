@@ -141,6 +141,7 @@ function checkNumbers() {
       cows++;
     }
   }
+
   let resultParagraf = document.createElement("p");
   divHidden.append(resultParagraf);
   resultParagraf.style.backgroundColor = "yellow";

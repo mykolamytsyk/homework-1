@@ -81,37 +81,180 @@
 
       // console.log(input1, input2, input3, input4);
 
-      let random1, random2, random3, random4;
+      // рядки
+      const word = "hollo";
+      console.log(word.indexOf("h"));
+      console.log(word.includes("h"));
 
-      do {
-        random1 = Math.round(Math.random() * (10 - 1));
-        random2 = Math.round(Math.random() * (10 - 1));
-        random3 = Math.round(Math.random() * (10 - 1));
-        random4 = Math.round(Math.random() * (10 - 1));
-      } while (
-        random1 === random2 ||
-        random1 === random3 ||
-        random1 === random4 ||
-        random2 === random3 ||
-        random2 === random4 ||
-        random3 === random4
-      );
+      let str = "Hello World";
+      console.log(str.indexOf("World")); // Виведе 6
 
-      // console.log(random1, random2, random3, random4);
-      // let arrRandom = [random1, random2, random3, random4];
-      // console.log({ arrRandom });
-      // let arrInput = [1, 2, 3, 6];
-      // console.log(arrInput);
-      // let bulls = 0;
-      // let cows = 0;
-      // for (let i = 0; i < arrInput.length; i++) {
-      //   if (arrInput[i] === arrRandom[i]) {
-      //     bulls++;
-      //   } else if (arrRandom.includes(arrInput[i])) {
-      //     cows++;
-      //   }
+      const fileName = "script.js";
+      console.log(typeof fileName);
+      console.log(fileName.endsWith(".js"));
+
+      const replace = "main.rs";
+      console.log(replace.replace("rs", "js"));
+
+      let cost;
+      const subscription = "pro";
+
+      if (subscription === "pro") {
+        cost = 100;
+      } else {
+        cost = 0;
+      }
+
+      console.log(cost); // 100
+
+      const age = 5 < 4 ? console.log("ok") : console.log("no");
+      console.log(age);
+
+      const num1 = 5;
+      const num2 = 10;
+      const biggerNumber = num1 > num2 ? num1 : num2;
+
+      console.log(biggerNumber); // 10
+
+      // ++++++++++++++++++++++++++++++++++++++++++
+      // изначально было без else
+      const clients = ["Mango", "Poly", "Ajax"];
+      const clientNameToFind = "Poly";
+      let message;
+
+      for (const client of clients) {
+        // На кожній ітерації будемо перевіряти чи збігається елемент масиву з
+        // іменем клієнта. Якщо збігається - записуємо в message повідомлення
+        // про успіх і робимо break, щоб далі не шукати
+        if (client === clientNameToFind) {
+          message = "Клієнт з таким ім'ям є в базі даних!";
+          break;
+        }
+        // Якщо вони не збігаються - записуємо в message повідомлення про відсутність імені
+        else {
+          message = "Клієнт з таким ім'ям відсутній в базі даних!";
+        }
+      }
+
+      console.log(message); // "Клієнт з таким ім'ям є в базі даних!"
+
+      let a = 5;
+      // Присвоєння за значенням, в пам'яті буде створена ще
+      // одна комірка, в яку буде скопійоване значення 5
+      let b = a;
+      console.log(a); // 5
+      console.log(b); // 5
+
+      // Змінимо значення a
+      a = 10;
+      console.log(a); // 10
+      // Значення b не змінилося, оскільки це окрема копія
+      console.log(b); // 5
+
+      // function exampleFunction() {
+      //   console.log(arguments);
+      //   return arguments;
       // }
-      // console.log(`bulls ${bulls} cows ${cows}`);
+
+      const array1 = exampleFunction(1, "two", true);
+      // Вывод: { '0': 1, '1': 'two', '2': true }
+      const array2 = Array.from(exampleFunction(1, "two", true));
+
+      if (array1 !== array2) {
+        console.log(typeof array1);
+      } else {
+        console.log(typeof array2);
+      }
+
+      function exampleFunction() {
+        console.log(arguments);
+      }
+
+      exampleFunction(1, "two", true);
+
+      function exampleFunction(...args) {
+        console.log(args);
+      }
+
+      const array3 = exampleFunction(1, "two", true);
+      // Вывод: [1, 'two', true]
+
+      // const array1 = Array.from(array3);
+
+      function withdraw(amount, balance) {
+        if (amount === 0) {
+          console.log("Для проведення операції введіть суму більшу за нуль");
+        } else if (amount > balance) {
+          console.log("Недостатньо коштів на рахунку");
+        } else {
+          console.log("Операція зняття коштів проведена успішно");
+        }
+      }
+
+      withdraw(0, 300); // "Для проведення операції введіть суму більшу за нуль"
+      withdraw(500, 300); // "Недостатньо коштів на рахунку"
+      withdraw(100, 300); // "Операція зняття коштів проведена успішно"
+
+      function withdraw(amount, balance) {
+        // Якщо умова виконується, викликається console.log
+        // і вихід із функції. Код після тіла if не виконається.
+        if (amount === 0) {
+          console.log("Для проведення операції введіть суму більшу за нуль");
+          return;
+        }
+
+        // Якщо умова першого if не виконалась, його тіло пропускається
+        // та інтерпретатор доходе до другого if.
+        // Якщо умова виконується, викликається console.log і вихід із функції.
+        // Код, що знаходиться після тіла if, не виконається.
+        if (amount > balance) {
+          console.log("Недостатньо коштів на рахунку");
+          return;
+        }
+
+        // Якщо жоден із попередніх if не виконався,
+        // інтерпретатор доходить до цього коду і виконує його.
+        console.log("Операція зняття коштів проведена");
+      }
+
+      withdraw(0, 300); // "Для проведення операції введіть суму більшу за нуль"
+      withdraw(500, 300); // "Недостатньо коштів на рахунку"
+      withdraw(100, 300); // "Операція зняття коштів проведена"
+
+      function fnA() {
+        console.log("Лог всередині функції fnA до виклику fnB");
+        fnB();
+        console.log("Лог всередині функції fnA після виклику fnB");
+      }
+
+      function fnB() {
+        console.log("Лог всередині функції fnB");
+      }
+
+      console.log("Лог до виклику fnA");
+      fnA();
+      console.log("Лог після виклику fnA");
+
+      // "Лог до виклику fnA"
+      // "Лог всередині функції fnA до виклику fnB"
+      // "Лог всередині функції fnB"
+      // "Лог всередині функції fnA після виклику fnB"
+      // "Лог після виклику fnA"
+
+      // function fn(numbers) {
+      //   // Змінна args буде містити повноцінний масив
+      //   console.log(numbers);
+      // }
+      // fn(1, "ggg", 2);
+      // let numbers = [];
+      // function getRandomNumber(...args) {
+      //   for (i = 0; numbers.lenght < 4; numbers.push(args)) {
+      //     console.log(numbers);
+      //   }
+      //   return numbers;
+      // }
+      // getRandomNumber(1, 2, 3);
+      // function generateUniqueFourDigitNumber() {
     </script>
   </body>
 </html>
