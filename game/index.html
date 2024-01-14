@@ -230,7 +230,9 @@
       while (mySet.size < 4) {
         mySet.add(Math.floor(Math.random() * 9 + 1));
       }
+
       const setArray = Array.from(mySet);
+      console.log(setArray);
       // Инпут
       const input = document.createElement("input");
       input.maxLength = 4;
@@ -305,13 +307,13 @@
         // Проверка на наличие параграфа с результатом
 
         const par = document.querySelector("p");
-        if (par) {
-          par.remove();
-        }
+        // if (par) {
+        //   par.remove();
+        // }
 
         const newPar = document.createElement("p");
         document.body.append(newPar);
-        newPar.textContent = `Cows: ${cows} and Bulls: ${bulls}`;
+        newPar.textContent = `Ваше число: ${inputArray} Cows: ${cows} and Bulls: ${bulls}`;
 
         // Добавить, в случае победі
 

@@ -5,7 +5,167 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+
   <body>
-    <script></script>
+    <script>
+      // let arr = [1, 2, 3, 4, 5];
+      // for (let elem of arr) {
+      //     console.log(elem);
+      // }
+      // let obj = {
+      //     a: 1,
+      //     b: 2,
+      //     c: 3,
+      // };
+      // for (let key in obj) {
+      //     console.log(obj[key]);
+      // }
+      // Выведите в консоль числа от 11 до 33
+      // let arr = [1, 2, 3, 4, 5];
+      // for (let i = 0; i <= arr.length - 1; i++) {
+      //     console.log(i);
+      //     console.log('-----------');
+      //     console.log(arr[i]);
+      // }
+
+      // for (let i = arr.length - 1; i >= 0; i--) {
+      //     console.log(arr[i]);
+      // }
+
+      // let arr = ['a', 'b', 'c', 'd', 'e'];
+
+      // for (let i = 0; i <= arr.length -1; i++) {
+      //     console.log(arr[i]);
+      // }
+
+      // let arr = [1, 2, 3, 4, 5];
+
+      // for (let elem of arr) {
+      //     if (elem % 2 === 0) {
+      //         console.log(elem);
+      //     }
+      //     if (elem > 2.5) {
+      //         return 1
+      //     } else {
+      //         return 0
+      //     }
+      // }
+
+      // которые больше 3-х, но меньше 10.
+      // let arr = [2, 5, 9, 15, 1, 4];
+
+      // for (let elem of arr) {
+      //     if (elem > 3 && elem < 10) {
+      //         console.log(elem);
+      //     }
+      // }
+
+      // Выведите в консоль те элементы объекта, значения которых - нечетные числа.
+      // let obj = { name: 1, 'b': 2, 'c': 3, "d": 4, e: 5 };
+
+      // console.log(obj['name']);
+
+      // for (let key in obj) {
+      //     if (obj[key] % 2 !== 0) {
+      //         console.log(key);
+      //     }
+      // }
+
+      //result 'xxxxxxxxxx' - 10
+      // let str = '';
+      // console.log(str.length)
+      // console.log(10 > str.length);
+
+      // for (;10 > str.length;) {
+      //     str += 'x'
+      // }
+
+      // console.log(str);
+
+      // строку '12345'
+
+      // let str = '';
+
+      // for (let i = 1; i <= 5; i++) {
+      //     str += i;
+      // }
+
+      // console.log(str);
+
+      // '-1-2-3-4-5-6-7-8-9-'.
+      // let str = '';
+      // for (let i = 1; i <= 9; i++) {
+      //     str += '-' + i;
+      //     if (i == 9) {
+      //         str += '-'
+      //     }
+      // }
+
+      // console.log(str);
+
+      // строку '987654321'.
+
+      // напишите функцию которая возвращает строку из массиыв чисел в формате телефона
+      // "(xxx) xxx-xxxx"
+      //   const numbers = [1, 2, 3, 4, 5, 6, 7, 1, 1, 1];
+
+      //   // "(123) xxx-xxxx"
+
+      //   function fn(template, numbers) {
+      //     let str = "";
+      //     for (let i = 1; i <= numbers.length; i++) {
+      //       //   str += template.replace("x", i);
+      //       for (let elem of template) {
+      //         // if (если в елем есть х то присваиваем цифру  к стр через +=, иначе просто добавляй к стр елем) {
+
+      //         //     вариант 2 сделать с помощью [].reduce - метод масива
+      //             str += elem.replace("x", i);
+      //         }
+
+      //         console.log(elem);
+      //       }
+
+      //       // str += +i;
+
+      //       //   if (i < 1) {
+      //       //     str += "(";
+      //       //   } else if (i == 3) {
+      //       //     str += ") ";
+      //       //   } else if (i == 6) {
+      //       //     str += "-";
+      //       //   }
+      //     }
+      //     console.log(str);
+      //   }
+
+      //   let result1 = fn("(xxx) xxx-xxxx", numbers);
+      //     let result2 = fn("(xxx) xxx-xxxx-xxx (xxx)", numbers);
+      function formatPhoneNumber(template, numbers) {
+        let result = "";
+        let numIndex = 0;
+
+        for (let i = 0; i < template.length; i++) {
+          const currentChar = template[i];
+
+          if (currentChar === "x") {
+            // Если текущий символ - маркер 'x', заменяем его на цифру
+            result += numbers[numIndex] !== undefined ? numbers[numIndex] : "x";
+            numIndex++;
+          } else {
+            // В противном случае, добавляем текущий символ из шаблона
+            result += currentChar;
+          }
+        }
+
+        return result;
+      }
+
+      const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+      const result1 = formatPhoneNumber("(xxx) xxx-xxxx", numbers);
+      const result2 = formatPhoneNumber("(xxx) xxx-xxxx-xxx (xxx)", numbers);
+
+      console.log(result1); // Выведет: "(123) 456-7890"
+      console.log(result2); // Выведет: "(123) 456-7890-xxx (xxx)"
+    </script>
   </body>
 </html>
